@@ -25,6 +25,8 @@ const userSchema = new mongoose.Schema({
   profilePicture: { type: String, default: "" }, // URL for the profile picture
   lastOnline: { type: Date, default: Date.now }, // Last time the user was online
   status: { type: String, default: "Online" },
+  otp: { type: String },
+  otpExpires: { type: Date },
 });
 
 const User = mongoose.model("User", userSchema);
