@@ -1,0 +1,6 @@
+@import "../styles/mixins";
+@import "../styles/variables";
+.page-404 {
+  height: 100vh;
+  @include flex(row, center, center);
+}

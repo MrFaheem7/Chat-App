@@ -1,0 +1,70 @@
+// client/src/components/LoginForm.scss
+
+@import "../../styles/variables";
+@import "../../styles/mixins";
+.login-form {
+  background-color: transparent;
+  backdrop-filter: blur(10px);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px $box-shadow;
+  width: 100%;
+  max-width: 400px;
+
+  .form-group {
+    margin-bottom: 16px;
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      padding: 8px;
+      color: white;
+      background-color: transparent;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+
+    .error {
+      color: #e74c3c;
+      margin-top: 4px;
+      font-size: 14px;
+    }
+  }
+
+  button {
+    width: 100%;
+    padding: 12px;
+    background-color: #0b3bc0;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: darken(#0b3bc0, 10%);
+    }
+  }
+  .links {
+    @include flex(row, space-between, center);
+    a {
+      color: $primary-color;
+      text-align: center;
+      margin-top: 16px;
+
+      &:hover {
+        color: darken($primary-color, 15%);
+      }
+    }
+  }
+}

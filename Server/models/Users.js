@@ -13,7 +13,6 @@ const userSchema = new mongoose.Schema({
   },
   password: {
     type: String,
-    unique: true,
     required: true,
   },
   rooms: [
@@ -22,7 +21,7 @@ const userSchema = new mongoose.Schema({
       ref: "Room",
     },
   ],
-  profilePicture: { type: String, default: "" }, // URL for the profile picture
+  image: { type: String, required: true }, // URL for the profile picture
   lastOnline: { type: Date, default: Date.now }, // Last time the user was online
   status: { type: String, default: "Online" },
   otp: { type: String },

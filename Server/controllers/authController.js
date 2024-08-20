@@ -3,26 +3,43 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const crypto = require("crypto");
 const nodemailer = require("nodemailer");
-//register
+
+// Register User
 exports.registerUser = async (req, res) => {
   const { name, email, password } = req.body;
-  console.log(req.body);
-  if (!name || !email || !password) {
+  const image = req.file ? req.file.filename : "";
+
+  if (!name || !email || !password || !image) {
     return res.status(400).json({ msg: "Please enter all fields" });
   }
+
   try {
     let user = await User.findOne({ email });
     if (user) {
       return res.status(400).json({ msg: "User already exists" });
     }
-    user = new User({ name, email, password });
-    //Hash Password
+    user = await User.findOne({ name });
+    if (user) {
+      return res.status(400).json({ msg: "Username is already taken" });
+    }
+
+    user = new User({
+      name,
+      email,
+      password,
+      image: image ? `/uploads/${image}` : "",
+    });
+
+    // Hash Password
     const salt = await bcrypt.genSalt(10);
     user.password = await bcrypt.hash(password, salt);
     await user.save();
+
+    // Sending success response after user is saved
+    return res.status(201).json({ msg: "User registered successfully" });
   } catch (err) {
     console.error(err.message);
-    res.status(500).send("Server Error");
+    return res.status(500).send("Server Error");
   }
 };
 //login
@@ -64,6 +81,16 @@ exports.getUser = async (req, res) => {
   try {
     const user = await User.findById(req.user.id).select("-password");
     res.json(user);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+};
+//get All users
+exports.getAllUsers = async (req, res) => {
+  try {
+    const users = await User.find().select("-password");
+    res.json(users);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");

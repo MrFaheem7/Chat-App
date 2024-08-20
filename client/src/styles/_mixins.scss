@@ -1,0 +1,45 @@
+@import "./variables";
+
+@mixin flex($direction: row, $justify: "", $align: stretch, $gap: 0) {
+  display: flex;
+  flex-direction: $direction;
+  @if $justify != "" {
+    justify-content: $justify;
+  }
+  align-items: $align;
+  gap: $gap;
+}
+
+@mixin flex-center {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@mixin responsive {
+  @media (max-width: 768px) {
+    @content;
+  }
+}
+@mixin customBorder(
+  $width: 1px,
+  $style: solid,
+  $color: #D2D2D2,
+  $radius: 5px,
+  $side: null
+) {
+  @if $side == null {
+    border: $width $style $color;
+  } @else {
+    @if $side == "top" {
+      border-top: $width $style $color;
+    } @else if $side == "right" {
+      border-right: $width $style $color;
+    } @else if $side == "bottom" {
+      border-bottom: $width $style $color;
+    } @else if $side == "left" {
+      border-left: $width $style $color;
+    }
+  }
+  border-radius: $radius;
+}
