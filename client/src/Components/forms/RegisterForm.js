@@ -9,7 +9,7 @@ import { AuthContext } from "../../contexts/AuthContext";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUpload } from "@fortawesome/free-solid-svg-icons";
+import { faFileUpload } from "@fortawesome/free-solid-svg-icons";
 
 const RegisterForm = () => {
   const { signUp, loading } = useContext(AuthContext);
@@ -59,7 +59,7 @@ const RegisterForm = () => {
         ) : (
           <div className="profile-picture-container">
             <label htmlFor="profile-picture-input">
-              <FontAwesomeIcon icon={faUpload} size="2x" color="white" />
+              <FontAwesomeIcon icon={faFileUpload} size="2x" color="white" />
               <p>Upload Profile Picture</p>
               <input
                 name="image"
