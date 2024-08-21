@@ -12,20 +12,22 @@ import { ToastContainer } from "react-toastify";
 import { AuthProvider } from "./contexts/AuthContext";
 import Public from "./routes/Public";
 import Private from "./routes/Private";
-import PublicLayout from "./pages/PublicLayout";
+import Layout from "./pages/Layout";
 import { Page404 } from "./pages/Page404";
 const LoginPage = lazy(() => import("./pages/LoginPage"));
 const RegisterPage = lazy(() => import("./pages/Register"));
-const BroadcastPage = lazy(() => import("./pages/BroadcastPage"));
+const HomePage = lazy(() => import("./pages/Home"));
 const ForgetPassword = lazy(() => import("./pages/ForgetPassword"));
 const ResetPassword = lazy(() => import("./pages/ResetPassword"));
+const PrivateChat = lazy(() => import("./pages/PrivateChat"));
+const RoomsPage = lazy(() => import("./pages/Rooms"));
 
 function App() {
   return (
     <Router>
       <ToastContainer />
       <AuthProvider>
-        <PublicLayout>
+        <Layout>
           <Suspense fallback={<Spinner />}>
             <Routes>
               <Route element={<Public />}>
@@ -35,13 +37,15 @@ function App() {
                 <Route path="/reset-password" element={<ResetPassword />} />
               </Route>
               <Route element={<Private />}>
-                <Route path="/broadcast" element={<BroadcastPage />} />
+                <Route path="/home" element={<HomePage />} />
+                <Route path="/private-chat/:userId" element={<PrivateChat />} />
+                <Route path="/room-chat/:roomId" element={<RoomsPage />} />
               </Route>
               <Route path="/" element={<Navigate to="/login" />} />
               <Route path="*" element={<Page404 />} />
             </Routes>
           </Suspense>
-        </PublicLayout>
+        </Layout>
       </AuthProvider>
     </Router>
   );

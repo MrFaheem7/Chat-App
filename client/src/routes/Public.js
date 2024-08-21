@@ -10,7 +10,7 @@ const Public = () => {
     return <Spinner />;
   }
 
-  return !user ? <Outlet /> : <Navigate to="/broadcast" />;
+  return !user ? <Outlet /> : <Navigate to="/home" />;
 };
 
 export default Public;

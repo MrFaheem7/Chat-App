@@ -45,10 +45,10 @@ const RegisterForm = () => {
     }
   };
   return (
-    <>
+    <div className="container">
       <form onSubmit={handleSubmit(onSubmit)} className="signup-form">
         <h2>| Register Your Account</h2>
-        {imagePreview ? (
+        {imagePreview && (
           <div className="profile-picture-container">
             <img
               className="profile-picture"
@@ -56,23 +56,22 @@ const RegisterForm = () => {
               alt="Profile Picture"
             />
           </div>
-        ) : (
-          <div className="profile-picture-container">
-            <label htmlFor="profile-picture-input">
-              <FontAwesomeIcon icon={faFileUpload} size="2x" color="white" />
-              <p>Upload Profile Picture</p>
-              <input
-                name="image"
-                required
-                type="file"
-                id="profile-picture-input"
-                accept="image/*"
-                onChange={handleImageChange}
-              />
-              {!selectedImage && <p className="error">Image Is Required</p>}
-            </label>
-          </div>
         )}
+        <div className="profile-picture-container">
+          <label htmlFor="profile-picture-input">
+            <FontAwesomeIcon icon={faFileUpload} size="2x" color="white" />
+            <p>Upload Profile Picture</p>
+            <input
+              name="image"
+              required
+              type="file"
+              id="profile-picture-input"
+              accept="image/*"
+              onChange={handleImageChange}
+            />
+            {!selectedImage && <p className="error">Image Is Required</p>}
+          </label>
+        </div>
 
         <div className="form-group">
           <label htmlFor="name">Name</label>
@@ -105,10 +104,10 @@ const RegisterForm = () => {
 
         <button type="submit">{loading ? "Signup... " : "Signup"}</button>
         <Link to="/login">
-          <p>Already have an account? Login</p>
+          <span>Already have an account? Login</span>
         </Link>
       </form>
-    </>
+    </div>
   );
 };
 

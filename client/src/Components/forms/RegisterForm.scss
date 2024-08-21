@@ -5,7 +5,8 @@
   backdrop-filter: blur(10px);
   color: white;
   border: 1px solid rgba(255, 255, 255, 0.2);
-  padding: 40px;
+  padding: 4px 40px 20px 40px;
+  margin-top: 4px;
   border-radius: 8px;
   box-shadow: 0 4px 8px $box-shadow;
   width: 100%;
@@ -13,14 +14,12 @@
 
   .profile-picture-container {
     text-align: center;
-    margin-bottom: 8px;
 
     .profile-picture {
       width: 150px;
       height: 150px;
       border-radius: 50%;
       object-fit: cover;
-      margin-bottom: 10px;
     }
 
     label {
@@ -41,11 +40,11 @@
   }
 
   .form-group {
-    margin-bottom: 16px;
+    margin-bottom: 10px;
 
     label {
       display: block;
-      margin-bottom: 8px;
+      margin-bottom: 4px;
       font-weight: bold;
     }
 
@@ -59,12 +58,6 @@
       border: 1px solid #ccc;
       border-radius: 4px;
       font-size: 16px;
-    }
-
-    .error {
-      color: #e74c3c;
-      margin-top: 4px;
-      font-size: 14px;
     }
   }
 
@@ -97,5 +90,11 @@
 h2 {
   color: #ffffff;
   text-align: center;
-  margin-bottom: 24px;
+  margin-bottom: 5px;
+  text-align: center;
+}
+.error {
+  color: #e74c3c;
+  margin-top: 4px;
+  font-size: 12px;
 }

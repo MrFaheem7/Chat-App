@@ -1,18 +1,30 @@
 // Variables for easy theme customization
 @import "../styles/variables";
-
-body {
+.public_layout {
   font-family: "Arial", sans-serif;
-  background-color: $background-color;
   margin: 0;
   padding: 0;
   height: 100vh;
-  background-image: url("../assets/jpeg/bg-image.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  // background-image: url("../assets/jpeg/bg-image.jpg");
+  // background-size: cover;
+  // background-position: center;
+  // background-repeat: no-repeat;
 }
-
+.private_layout {
+  font-family: "Arial", sans-serif;
+  color: white;
+  margin: 0;
+  padding: 0;
+  background-image: linear-gradient(
+    rgba(5, 11, 102, 0.938),
+    rgba(88, 88, 88, 0.575)
+  );
+  main {
+    margin-top: 30px;
+    padding: 40px;
+    height: 100vh;
+  }
+}
 h1 {
   color: $primary-color;
   text-align: center;

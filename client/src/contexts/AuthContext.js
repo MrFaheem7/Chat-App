@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 
 export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
+  const API_URL = process.env.REACT_APP_BASE_URL;
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ export const AuthProvider = ({ children }) => {
     try {
       const token = localStorage.getItem("token");
       if (token) {
-        const res = await axios.get(`http://localhost:3000/api/auth/user`, {
+        const res = await axios.get(`${API_URL}/api/auth/user`, {
           headers: {
             "x-auth-token": token,
           },
@@ -37,15 +38,11 @@ export const AuthProvider = ({ children }) => {
       formData.append("email", email);
       formData.append("password", password);
       formData.append("image", image);
-      const res = await axios.post(
-        `http://localhost:3000/api/auth/register`,
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+      const res = await axios.post(`${API_URL}/api/auth/register`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
       console.log(res.data);
       setLoading(false);
       toast.success(res.data.msg);
@@ -59,7 +56,7 @@ export const AuthProvider = ({ children }) => {
   const login = async (email, password) => {
     setLoading(true);
     try {
-      const res = await axios.post("http://localhost:3000/api/auth/login", {
+      const res = await axios.post(`${API_URL}/api/auth/login`, {
         email,
         password,
       });
@@ -69,7 +66,7 @@ export const AuthProvider = ({ children }) => {
       toast.success("Login successful");
       localStorage.setItem("token", res.data.token);
 
-      navigate("/broadcast");
+      navigate("/home");
     } catch (err) {
       console.error("Failed to Login ", err);
       setLoading(false);
@@ -88,7 +85,7 @@ export const AuthProvider = ({ children }) => {
       let token = localStorage.getItem("token");
       console.log(token);
       const res = await axios.post(
-        `http://localhost:3000/api/auth/logout`,
+        `${API_URL}/api/auth/logout`,
         {}, // empty body
         {
           headers: {
@@ -108,12 +105,9 @@ export const AuthProvider = ({ children }) => {
   const forgetPassword = async (email) => {
     try {
       setLoading(true);
-      const res = await axios.post(
-        "http://localhost:3000/api/auth/forget-password",
-        {
-          email,
-        }
-      );
+      const res = await axios.post(`${API_URL}/api/auth/forget-password`, {
+        email,
+      });
       setLoading(false);
       console.log(res.data);
       toast.success(res.data.msg);
@@ -127,13 +121,10 @@ export const AuthProvider = ({ children }) => {
   };
   const resetPassword = async (otp, newPassword) => {
     try {
-      const res = await axios.post(
-        "http://localhost:3000/api/auth/reset-password",
-        {
-          otp,
-          newPassword,
-        }
-      );
+      const res = await axios.post(`${API_URL}/api/auth/reset-password`, {
+        otp,
+        newPassword,
+      });
       console.log(res.data);
       toast.success(res.data.msg);
       navigate("/login");
